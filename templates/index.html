@@ -29,11 +29,14 @@
             --blood-red: #FF0033;
             --deep-black: #000000;
             --text-white: #ffffff;
+            --font-scale: 1;
+            --padding-scale: 1;
         }
 
         html {
             scroll-behavior: smooth;
             scroll-snap-type: y proximity;
+            font-size: calc(16px * var(--font-scale));
         }
 
         body {
@@ -185,11 +188,11 @@
         /* Buttons */
         .neon-btn {
             display: inline-block;
-            padding: 15px 40px;
+            padding: calc(15px * var(--padding-scale)) calc(40px * var(--padding-scale));
             background: transparent;
             border: 2px solid var(--neon-purple);
             color: var(--text-white);
-            font-size: 1.2rem;
+            font-size: calc(1.2rem * var(--font-scale));
             font-weight: 900;
             text-decoration: none;
             text-transform: uppercase;
@@ -242,7 +245,7 @@
             position: fixed;
             top: 0;
             width: 100%;
-            padding: 20px 5%;
+            padding: calc(20px * var(--padding-scale)) 5%;
             background: rgba(0, 0, 0, 0.95);
             backdrop-filter: blur(10px);
             z-index: 1000;
@@ -255,13 +258,13 @@
         }
 
         nav.scrolled {
-            padding: 15px 5%;
+            padding: calc(15px * var(--padding-scale)) 5%;
             background: rgba(0, 0, 0, 0.98);
             box-shadow: 0 5px 20px rgba(192, 38, 211, 0.2);
         }
 
         .logo {
-            font-size: 1.8rem;
+            font-size: calc(1.8rem * var(--font-scale));
             font-weight: 900;
             color: var(--neon-purple);
             text-shadow: 0 0 5px var(--neon-purple);
@@ -270,7 +273,7 @@
 
         .nav-links {
             display: flex;
-            gap: 30px;
+            gap: calc(30px * var(--padding-scale));
             list-style: none;
         }
 
@@ -278,7 +281,7 @@
             color: var(--text-white);
             text-decoration: none;
             font-weight: 900;
-            font-size: 0.9rem;
+            font-size: calc(0.9rem * var(--font-scale));
             text-transform: uppercase;
             letter-spacing: 1px;
             transition: all 0.3s ease;
@@ -327,13 +330,13 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 20px;
+            padding: calc(20px * var(--padding-scale));
             position: relative;
             scroll-snap-align: start;
         }
 
         .hero-logo {
-            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-size: clamp(calc(2rem * var(--font-scale)), calc(8vw * var(--font-scale)), calc(5rem * var(--font-scale)));
             font-weight: 900;
             letter-spacing: 3px;
             margin-bottom: 10px;
@@ -342,7 +345,7 @@
         }
 
         .hero .tagline {
-            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            font-size: clamp(calc(1rem * var(--font-scale)), calc(2.5vw * var(--font-scale)), calc(1.3rem * var(--font-scale)));
             color: var(--text-white);
             margin-bottom: 40px;
             max-width: 700px;
@@ -351,7 +354,7 @@
         }
 
         .hero .subtext {
-            font-size: 1rem;
+            font-size: calc(1rem * var(--font-scale));
             color: var(--toxic-green);
             margin-top: 20px;
             font-weight: bold;
@@ -359,7 +362,7 @@
 
         /* Stats Section */
         .stats-section {
-            padding: 80px 5%;
+            padding: calc(80px * var(--padding-scale)) 5%;
             background: #0a0a0a;
             scroll-snap-align: start;
             position: relative;
@@ -386,7 +389,7 @@
 
         .section-title {
             text-align: center;
-            font-size: clamp(2rem, 5vw, 3rem);
+            font-size: clamp(calc(2rem * var(--font-scale)), calc(5vw * var(--font-scale)), calc(3rem * var(--font-scale)));
             margin-bottom: 50px;
             color: var(--neon-purple);
             text-transform: uppercase;
@@ -395,8 +398,8 @@
 
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(calc(220px * var(--padding-scale)), 1fr));
+            gap: calc(25px * var(--padding-scale));
             max-width: 1000px;
             margin: 0 auto;
         }
@@ -404,7 +407,7 @@
         .stat-card {
             background: rgba(192, 38, 211, 0.05);
             border: 1px solid rgba(192, 38, 211, 0.3);
-            padding: 25px;
+            padding: calc(25px * var(--padding-scale));
             text-align: center;
             border-radius: 8px;
             transition: all 0.3s ease;
@@ -445,14 +448,14 @@
         }
 
         .stat-number {
-            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-size: clamp(calc(1.8rem * var(--font-scale)), calc(4vw * var(--font-scale)), calc(2.5rem * var(--font-scale)));
             font-weight: 900;
             color: var(--toxic-green);
             margin-bottom: 10px;
         }
 
         .stat-label {
-            font-size: 0.9rem;
+            font-size: calc(0.9rem * var(--font-scale));
             color: var(--text-white);
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -462,7 +465,7 @@
         .stats-subtitle {
             text-align: center;
             margin-top: 50px;
-            font-size: 1.3rem;
+            font-size: calc(1.3rem * var(--font-scale));
             color: var(--text-white);
             font-style: italic;
             font-weight: normal;
@@ -470,14 +473,14 @@
 
         /* Games Section */
         .games-section {
-            padding: 80px 5%;
+            padding: calc(80px * var(--padding-scale)) 5%;
             background: var(--deep-black);
             scroll-snap-align: start;
         }
 
         .section-title {
             text-align: center;
-            font-size: clamp(2rem, 5vw, 3rem);
+            font-size: clamp(calc(2rem * var(--font-scale)), calc(5vw * var(--font-scale)), calc(3rem * var(--font-scale)));
             margin-bottom: 50px;
             color: var(--neon-purple);
             text-transform: uppercase;
@@ -486,8 +489,8 @@
 
         .games-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(calc(280px * var(--padding-scale)), 1fr));
+            gap: calc(25px * var(--padding-scale));
             max-width: 900px;
             margin: 0 auto;
         }
@@ -496,7 +499,7 @@
             background: rgba(0, 0, 0, 0.6);
             border: 1px solid var(--neon-purple);
             border-radius: 10px;
-            padding: 25px;
+            padding: calc(25px * var(--padding-scale));
             transition: all 0.3s ease;
             position: relative;
             will-change: transform, border-color, box-shadow;
@@ -526,14 +529,14 @@
         }
 
         .game-icon {
-            font-size: 2.5rem;
+            font-size: calc(2.5rem * var(--font-scale));
             margin-bottom: 15px;
             color: var(--toxic-green);
             filter: drop-shadow(0 0 5px var(--toxic-green));
         }
 
         .game-title {
-            font-size: 1.5rem;
+            font-size: calc(1.5rem * var(--font-scale));
             margin-bottom: 15px;
             color: var(--neon-purple);
             text-transform: uppercase;
@@ -544,7 +547,7 @@
             color: var(--text-white);
             opacity: 0.9;
             line-height: 1.8;
-            font-size: 0.95rem;
+            font-size: calc(0.95rem * var(--font-scale));
         }
 
         .game-features {
@@ -560,20 +563,20 @@
             color: var(--toxic-green);
             padding: 4px 12px;
             border-radius: 20px;
-            font-size: 0.75rem;
+            font-size: calc(0.75rem * var(--font-scale));
             text-transform: uppercase;
         }
 
         /* Trust Section */
         .trust-section {
-            padding: 80px 5%;
+            padding: calc(80px * var(--padding-scale)) 5%;
             background: #0a0a0a;
             scroll-snap-align: start;
         }
 
         .section-title {
             text-align: center;
-            font-size: clamp(2rem, 5vw, 3rem);
+            font-size: clamp(calc(2rem * var(--font-scale)), calc(5vw * var(--font-scale)), calc(3rem * var(--font-scale)));
             margin-bottom: 50px;
             color: var(--neon-purple);
             text-transform: uppercase;
@@ -589,7 +592,7 @@
             display: flex;
             align-items: center;
             gap: 20px;
-            padding: 18px;
+            padding: calc(18px * var(--padding-scale));
             margin-bottom: 12px;
             background: rgba(57, 255, 20, 0.03);
             border-left: 3px solid var(--toxic-green);
@@ -620,13 +623,13 @@
         }
 
         .trust-icon {
-            font-size: 1.5rem;
+            font-size: calc(1.5rem * var(--font-scale));
             color: var(--toxic-green);
             z-index: 1;
         }
 
         .trust-text {
-            font-size: 1rem;
+            font-size: calc(1rem * var(--font-scale));
             color: var(--text-white);
             font-weight: bold;
             z-index: 1;
@@ -634,15 +637,15 @@
 
         /* Today's Matches Section */
         .matches-section {
-            padding: 80px 5%;
+            padding: calc(80px * var(--padding-scale)) 5%;
             background: linear-gradient(180deg, var(--deep-black) 0%, #0a0a1a 100%);
             scroll-snap-align: start;
         }
 
         .matches-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(calc(300px * var(--padding-scale)), 1fr));
+            gap: calc(25px * var(--padding-scale));
             max-width: 900px;
             margin: 0 auto;
         }
@@ -651,7 +654,7 @@
             background: rgba(192, 38, 211, 0.05);
             border: 1px solid rgba(192, 38, 211, 0.3);
             border-radius: 10px;
-            padding: 25px;
+            padding: calc(25px * var(--padding-scale));
             transition: all 0.3s ease;
             position: relative;
             will-change: transform, border-color, box-shadow;
@@ -664,26 +667,26 @@
         }
 
         .match-game {
-            font-size: 1.5rem;
+            font-size: calc(1.5rem * var(--font-scale));
             color: var(--neon-purple);
             margin-bottom: 10px;
             text-transform: uppercase;
         }
 
         .match-time {
-            font-size: 1.1rem;
+            font-size: calc(1.1rem * var(--font-scale));
             color: var(--toxic-green);
             margin-bottom: 10px;
         }
 
         .match-entry {
-            font-size: 1.2rem;
+            font-size: calc(1.2rem * var(--font-scale));
             color: var(--text-white);
             margin-bottom: 10px;
         }
 
         .match-slots {
-            font-size: 0.9rem;
+            font-size: calc(0.9rem * var(--font-scale));
             color: #888;
             margin-bottom: 20px;
         }
@@ -715,7 +718,7 @@
 
         .match-urgency {
             margin-top: 15px;
-            font-size: 0.85rem;
+            font-size: calc(0.85rem * var(--font-scale));
             color: var(--blood-red);
             text-align: center;
             font-weight: 900;
@@ -723,14 +726,14 @@
 
         /* Join Section */
         .join-section {
-            padding: 100px 5%;
+            padding: calc(100px * var(--padding-scale)) 5%;
             text-align: center;
             background: linear-gradient(180deg, var(--deep-black) 0%, #0a0a1a 100%);
             scroll-snap-align: start;
         }
 
         .join-section h2 {
-            font-size: clamp(2rem, 5vw, 3rem);
+            font-size: clamp(calc(2rem * var(--font-scale)), calc(5vw * var(--font-scale)), calc(3rem * var(--font-scale)));
             margin-bottom: 20px;
             color: var(--neon-purple);
             text-transform: uppercase;
@@ -738,7 +741,7 @@
         }
 
         .join-section p {
-            font-size: 1.1rem;
+            font-size: calc(1.1rem * var(--font-scale));
             color: var(--text-white);
             max-width: 600px;
             margin: 0 auto 40px;
@@ -747,8 +750,8 @@
 
         .theme-switch {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: calc(20px * var(--padding-scale));
+            right: calc(20px * var(--padding-scale));
             width: 50px;
             height: 50px;
             background: rgba(192, 38, 211, 0.2);
@@ -771,13 +774,13 @@
         .join-note {
             margin-top: 30px;
             color: var(--toxic-green);
-            font-size: 0.95rem;
+            font-size: calc(0.95rem * var(--font-scale));
             font-weight: bold;
         }
 
         /* Footer */
         footer {
-            padding: 40px 5%;
+            padding: calc(40px * var(--padding-scale)) 5%;
             background: #050505;
             border-top: 1px solid rgba(192, 38, 211, 0.3);
             text-align: center;
@@ -785,7 +788,7 @@
         }
 
         .footer-logo {
-            font-size: 1.8rem;
+            font-size: calc(1.8rem * var(--font-scale));
             font-weight: 900;
             color: var(--neon-purple);
             margin-bottom: 20px;
@@ -795,7 +798,7 @@
         .footer-links {
             display: flex;
             justify-content: center;
-            gap: 25px;
+            gap: calc(25px * var(--padding-scale));
             margin-bottom: 30px;
             flex-wrap: wrap;
         }
@@ -803,7 +806,7 @@
         .footer-links a {
             color: var(--text-white);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: calc(0.9rem * var(--font-scale));
             text-transform: uppercase;
             letter-spacing: 1px;
             transition: color 0.3s;
@@ -814,7 +817,7 @@
         }
 
         .disclaimer {
-            font-size: 0.8rem;
+            font-size: calc(0.8rem * var(--font-scale));
             color: #666;
             margin-bottom: 20px;
             max-width: 700px;
@@ -826,11 +829,42 @@
         .copyright {
             color: var(--toxic-green);
             font-weight: 900;
-            font-size: 0.9rem;
+            font-size: calc(0.9rem * var(--font-scale));
+        }
+
+        /* Tablet Responsive (768px - 1024px) */
+        @media (max-width: 1024px) and (min-width: 769px) {
+            :root {
+                --font-scale: 0.95;
+                --padding-scale: 0.95;
+            }
+            
+            .hero-vortex {
+                width: 500px;
+                height: 500px;
+            }
+            
+            .games-grid {
+                grid-template-columns: repeat(2, 1fr);
+                max-width: 800px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .matches-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         /* Mobile Responsive */
         @media (max-width: 768px) {
+            :root {
+                --font-scale: 0.85;
+                --padding-scale: 0.9;
+            }
+            
             body {
                 cursor: auto;
             }
@@ -849,7 +883,7 @@
                 flex-direction: column;
                 align-items: center;
                 justify-content: flex-start;
-                padding-top: 50px;
+                padding-top: calc(50px * var(--padding-scale));
                 transition: left 0.3s ease;
                 border-top: 1px solid var(--neon-purple);
             }
@@ -876,7 +910,12 @@
             }
 
             .hero {
-                padding: 100px 20px;
+                padding: calc(100px * var(--padding-scale)) calc(20px * var(--padding-scale));
+            }
+
+            .hero-vortex {
+                width: 400px;
+                height: 400px;
             }
 
             .stats-grid,
@@ -888,6 +927,35 @@
             .footer-links {
                 flex-direction: column;
                 gap: 15px;
+            }
+            
+            .section-title {
+                margin-bottom: 30px;
+            }
+        }
+
+        /* Large Desktop (1440px and above) */
+        @media (min-width: 1440px) {
+            :root {
+                --font-scale: 1.1;
+                --padding-scale: 1.1;
+            }
+            
+            .hero-vortex {
+                width: 800px;
+                height: 800px;
+            }
+            
+            .games-grid {
+                max-width: 1200px;
+            }
+            
+            .stats-grid {
+                max-width: 1200px;
+            }
+            
+            .matches-grid {
+                max-width: 1200px;
             }
         }
 
@@ -1191,6 +1259,51 @@
     </div>
 
     <script>
+        // Device Detection and Scaling
+        (function() {
+            const detectDevice = () => {
+                const width = window.innerWidth;
+                const height = window.innerHeight;
+                const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+                const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+                const isAndroid = /android/i.test(userAgent);
+                const isTablet = (width >= 768 && width <= 1024) || (isIOS && height < 1024 && width < 1024);
+                const isMobile = width < 769;
+                const isDesktop = width >= 1025;
+                
+                // Set device-specific scaling
+                const root = document.documentElement;
+                if (isMobile) {
+                    root.style.setProperty('--font-scale', '0.85');
+                    root.style.setProperty('--padding-scale', '0.9');
+                    document.body.classList.add('device-mobile');
+                } else if (isTablet) {
+                    root.style.setProperty('--font-scale', '0.95');
+                    root.style.setProperty('--padding-scale', '0.95');
+                    document.body.classList.add('device-tablet');
+                } else if (isDesktop) {
+                    if (width >= 1440) {
+                        root.style.setProperty('--font-scale', '1.1');
+                        root.style.setProperty('--padding-scale', '1.1');
+                    } else {
+                        root.style.setProperty('--font-scale', '1');
+                        root.style.setProperty('--padding-scale', '1');
+                    }
+                    document.body.classList.add('device-desktop');
+                }
+                
+                // Log device type for debugging
+                console.log(`Device: ${isMobile ? 'Mobile' : isTablet ? 'Tablet' : 'Desktop'} (${width}x${height})`);
+            };
+            
+            // Run on load and resize
+            window.addEventListener('load', detectDevice);
+            window.addEventListener('resize', () => {
+                clearTimeout(window.resizeTimer);
+                window.resizeTimer = setTimeout(detectDevice, 250);
+            });
+        })();
+
         // Custom Cursor - Optimized
         const cursor = document.getElementById('cursor');
         const cursorFollower = document.getElementById('cursorFollower');
