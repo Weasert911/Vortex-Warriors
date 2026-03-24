@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join Match - Vortex Warriors</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --neon-purple: #C026D3;
+            --toxic-green: #39FF14;
+            --blood-red: #FF0033;
+            --deep-black: #000000;
+            --text-white: #ffffff;
+        }
+
+        body {
+            background-color: var(--deep-black);
+            color: var(--text-white);
+            font-family: 'Arial Black', 'Impact', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background: rgba(192, 38, 211, 0.05);
+            border: 1px solid var(--neon-purple);
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 0 30px rgba(192, 38, 211, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--neon-purple);
+            margin-bottom: 10px;
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .match-info {
+            background: rgba(57, 255, 20, 0.05);
+            border: 1px solid var(--toxic-green);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .match-info h3 {
+            color: var(--toxic-green);
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+
+        .match-info p {
+            margin: 8px 0;
+            font-size: 1rem;
+        }
+
+        .match-info strong {
+            color: var(--neon-purple);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--toxic-green);
+            font-weight: 900;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--neon-purple);
+            border-radius: 5px;
+            color: var(--text-white);
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: var(--toxic-green);
+            box-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--neon-purple);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            background: var(--toxic-green);
+            color: var(--deep-black);
+            box-shadow: 0 0 20px var(--toxic-green);
+            transform: translateY(-3px);
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: var(--text-white);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover {
+            color: var(--neon-purple);
+        }
+
+        .urgency-note {
+            background: rgba(255, 0, 51, 0.1);
+            border: 1px solid var(--blood-red);
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--blood-red);
+        }
+
+        .flash-messages {
+            margin-bottom: 20px;
+        }
+
+        .flash-messages .error {
+            background: rgba(255, 0, 51, 0.2);
+            border: 1px solid var(--blood-red);
+            color: var(--blood-red);
+            padding: 12px;
+            border-radius: 5px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Join Match</h1>
+        
+        <div class="flash-messages">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+
+        <div class="match-info">
+            <h3>{{ match.game }}</h3>
+            <p><strong>Time:</strong> {{ match.time.strftime('%I:%M %p') }}</p>
+            <p><strong>Entry Fee:</strong> ₹{{ match.entry_fee }}</p>
+            <p><strong>Slots Available:</strong> {{ match.available_slots }}/{{ match.total_slots }}</p>
+        </div>
+
+        <form method="POST" action="/register">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+            <input type="hidden" name="match_id" value="{{ match.id }}">
+            
+            <div class="form-group">
+                <label for="name">Player Name *</label>
+                <input type="text" id="name" name="name" required placeholder="Enter your name">
+            </div>
+
+            <div class="form-group">
+                <label for="uid">Game UID *</label>
+                <input type="text" id="uid" name="uid" required placeholder="Enter your {{ match.game }} UID">
+            </div>
+
+            <div class="form-group">
+                <label for="discord">Discord Username *</label>
+                <input type="text" id="discord" name="discord" required placeholder="e.g., username#1234">
+            </div>
+
+            <button type="submit" class="submit-btn">Proceed to Payment</button>
+        </form>
+    </div>
+
+    <a href="/" class="back-link">← Back to Matches</a>
+
+    <div class="urgency-note">
+        ⚠️ <strong>Important:</strong> Fill all details correctly. No refunds after registration. Payment must be confirmed before match starts.
+    </div>
+</body>
+</html>

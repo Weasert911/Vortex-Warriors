@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - Vortex Warriors</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --neon-purple: #C026D3;
+            --toxic-green: #39FF14;
+            --blood-red: #FF0033;
+            --deep-black: #000000;
+            --text-white: #ffffff;
+        }
+
+        body {
+            background-color: var(--deep-black);
+            color: var(--text-white);
+            font-family: 'Arial Black', 'Impact', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 700px;
+            background: rgba(192, 38, 211, 0.05);
+            border: 1px solid var(--neon-purple);
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 0 30px rgba(192, 38, 211, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--neon-purple);
+            margin-bottom: 10px;
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .payment-info {
+            background: rgba(57, 255, 20, 0.05);
+            border: 1px solid var(--toxic-green);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .payment-info h3 {
+            color: var(--toxic-green);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .payment-detail {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+        }
+
+        .payment-detail strong {
+            color: var(--neon-purple);
+        }
+
+        .amount {
+            font-size: 2.5rem;
+            color: var(--toxic-green);
+            text-align: center;
+            margin: 20px 0;
+            font-weight: 900;
+        }
+
+        .qr-section {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+        }
+
+        .qr-section h3 {
+            color: var(--neon-purple);
+            margin-bottom: 15px;
+        }
+
+        #qrcode {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        #qrcode img {
+            border: 2px solid var(--neon-purple);
+            border-radius: 10px;
+            padding: 10px;
+            background: white;
+        }
+
+        .upi-id {
+            margin-top: 15px;
+            font-size: 1.3rem;
+            color: var(--toxic-green);
+            font-weight: 900;
+            word-break: break-all;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 10px;
+            border: 1px dashed var(--neon-purple);
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        .upi-id:hover {
+            color: var(--neon-purple);
+            border-color: var(--toxic-green);
+            text-shadow: 0 0 10px var(--neon-purple);
+        }
+
+        .instructions {
+            background: rgba(255, 0, 51, 0.05);
+            border: 1px solid var(--blood-red);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .instructions h3 {
+            color: var(--blood-red);
+            margin-bottom: 15px;
+        }
+
+        .instructions ol {
+            margin-left: 20px;
+            line-height: 1.8;
+        }
+
+        .instructions li {
+            margin-bottom: 10px;
+        }
+
+        .payment-form {
+            margin: 30px 0;
+            padding: 25px;
+            background: rgba(192, 38, 211, 0.08);
+            border: 1px solid var(--neon-purple);
+            border-radius: 8px;
+        }
+
+        .payment-form h3 {
+            color: var(--neon-purple);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--toxic-green);
+            font-weight: 900;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        input[type="text"],
+        input[type="file"] {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--neon-purple);
+            border-radius: 5px;
+            color: var(--text-white);
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="file"]:focus {
+            outline: none;
+            border-color: var(--toxic-green);
+            box-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-input-wrapper input[type="file"] {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            cursor: pointer;
+            height: 100%;
+            width: 100%;
+        }
+
+        .file-input-label {
+            display: block;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px dashed var(--neon-purple);
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .file-input-label:hover {
+            border-color: var(--toxic-green);
+            background: rgba(57, 255, 20, 0.05);
+        }
+
+        .file-name {
+            margin-top: 8px;
+            font-size: 0.85rem;
+            color: var(--toxic-green);
+            text-align: center;
+        }
+
+        .confirm-btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--toxic-green);
+            color: var(--deep-black);
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .confirm-btn:hover {
+            background: var(--neon-purple);
+            color: white;
+            box-shadow: 0 0 20px var(--neon-purple);
+            transform: translateY(-3px);
+        }
+
+        .confirm-btn:disabled {
+            background: #666;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: var(--text-white);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover {
+            color: var(--neon-purple);
+        }
+
+        .flash-messages {
+            margin-bottom: 20px;
+        }
+
+        .flash-messages .success {
+            background: rgba(57, 255, 20, 0.2);
+            border: 1px solid var(--toxic-green);
+            color: var(--toxic-green);
+            padding: 12px;
+            border-radius: 5px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .flash-messages .error {
+            background: rgba(255, 0, 51, 0.2);
+            border: 1px solid var(--blood-red);
+            color: var(--blood-red);
+            padding: 12px;
+            border-radius: 5px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .player-summary {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .player-summary p {
+            margin: 5px 0;
+        }
+
+        .player-summary strong {
+            color: var(--neon-purple);
+        }
+
+        .warning-box {
+            background: rgba(255, 0, 51, 0.1);
+            border: 1px solid var(--blood-red);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .warning-box p {
+            color: var(--blood-red);
+            font-weight: 900;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            .amount {
+                font-size: 2rem;
+            }
+            
+            .payment-detail {
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Complete Payment</h1>
+        
+        <div class="flash-messages">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+
+        <div class="player-summary">
+            <p><strong>Name:</strong> {{ player.name }}</p>
+            <p><strong>Game UID:</strong> {{ player.uid }}</p>
+            <p><strong>Discord:</strong> {{ player.discord }}</p>
+        </div>
+
+        <div class="payment-info">
+            <h3>Match Details</h3>
+            <div class="payment-detail">
+                <span>Game:</span>
+                <strong>{{ match.game }}</strong>
+            </div>
+            <div class="payment-detail">
+                <span>Time:</span>
+                <strong>{{ match.time.strftime('%d %b %Y, %I:%M %p') }}</strong>
+            </div>
+        </div>
+
+        <div class="amount">
+            ₹{{ match.entry_fee }}
+        </div>
+
+        <div class="qr-section">
+            <h3>Scan to Pay</h3>
+            {% if settings and settings.qr_path %}
+                <img src="{{ url_for('static', filename=settings.qr_path) }}" alt="QR Code" style="max-width: 250px; border: 2px solid var(--neon-purple); border-radius: 10px; padding: 10px;">
+            {% else %}
+                <div id="qrcode"></div>
+            {% endif %}
+            <p style="margin-top: 10px; color: var(--text-white);">OR</p>
+            <div class="upi-id" id="upiId" title="Click to copy">
+                {% if settings and settings.upi_id %}{{ settings.upi_id }}{% else %}Not configured{% endif %}
+            </div>
+        </div>
+
+        <div class="instructions">
+            <h3>Payment Instructions</h3>
+            <ol>
+                <li>Open any UPI app (PhonePe, Google Pay, Paytm, etc.)</li>
+                <li>Scan the QR code above OR use the UPI ID shown</li>
+                <li>Pay exactly <strong>₹{{ match.entry_fee }}</strong></li>
+                <li>Note the <strong>Transaction/UTR ID</strong> from your payment app</li>
+                <li>Upload a <strong>screenshot</strong> of the payment confirmation</li>
+                <li>Enter the Transaction ID below and confirm</li>
+            </ol>
+        </div>
+
+        <div class="payment-form">
+            <h3>Submit Payment Proof</h3>
+            <form method="POST" action="/confirm-payment/{{ player.id }}" enctype="multipart/form-data">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+                
+                <div class="form-group">
+                    <label for="utr">Transaction / UTR ID *</label>
+                    <input type="text" id="utr" name="utr" required placeholder="Enter your transaction ID (e.g., 123456789012)" minlength="6">
+                </div>
+
+                <div class="form-group">
+                    <label for="screenshot">Payment Screenshot * (PNG, JPG, JPEG, GIF, WEBP)</label>
+                    <div class="file-input-wrapper">
+                        <input type="file" id="screenshot" name="screenshot" accept=".png,.jpg,.jpeg,.gif,.webp" required>
+                        <label for="screenshot" class="file-input-label">📁 Choose Screenshot File</label>
+                    </div>
+                    <div class="file-name" id="fileName">No file selected</div>
+                </div>
+
+                <button type="submit" class="confirm-btn">Confirm Payment</button>
+            </form>
+        </div>
+
+        <div class="warning-box">
+            <p>⚠️ <strong>Important:</strong> Upload a clear screenshot of your payment confirmation. Enter the correct Transaction/UTR ID. Both will be verified by admin.</p>
+        </div>
+
+        <a href="/" class="back-link">← Cancel / Back to Home</a>
+    </div>
+
+    {% if not settings.qr_path and settings and settings.upi_id %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script>
+        // Generate QR dynamically if no QR image uploaded
+        const upiId = '{{ settings.upi_id }}';
+        const amount = '{{ match.entry_fee }}';
+        const upiString = 'upi://pay?pa=' + upiId + '&pn=VortexWarriors&am=' + amount + '&cu=INR';
+        
+        new QRCode(document.getElementById('qrcode'), {
+            text: upiString,
+            width: 200,
+            height: 200
+        });
+    </script>
+    {% endif %}
+
+    <script>
+        // Copy UPI on click
+        document.getElementById('upiId').addEventListener('click', function() {
+            const upiId = this.textContent;
+            if (upiId && upiId !== 'Not configured') {
+                navigator.clipboard.writeText(upiId).then(() => {
+                    const original = this.textContent;
+                    this.textContent = 'Copied!';
+                    setTimeout(() => this.textContent = original, 2000);
+                });
+            }
+        });
+
+        // Display selected file name
+        document.getElementById('screenshot').addEventListener('change', function(e) {
+            const fileName = e.target.files[0]?.name || 'No file selected';
+            document.getElementById('fileName').textContent = fileName;
+        });
+    </script>
+</body>
+</html>

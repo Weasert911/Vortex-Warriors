@@ -1,0 +1,1372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Vortex Warriors (VW) - India's deadliest micro FF deathmatch tournament organization. Join competitive Free Fire tournaments with fair-play guaranteed.">
+    <meta name="keywords" content="Vortex Warriors, VW, Free Fire tournaments, FF deathmatch, micro tournaments, esports India, competitive gaming">
+    <meta name="author" content="Vortex Warriors">
+    <meta property="og:title" content="Vortex Warriors (VW) – FF Micro Deathmatch Tournaments">
+    <meta property="og:description" content="Join India's deadliest micro FF deathmatch tournaments. Fair-play guaranteed with instant payouts.">
+    <meta property="og:image" content="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNCMDI2RDMiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMzOUZGMjQiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDAiIHI9IjgwIiBmaWxsPSJ1cmwoI2cpIi8+PHBhdGggZD0iTTEwMCAxMEgzMEgxMjBIMTBWMTBIMHoiIGZpbGw9IndoaXRlIi8+PC9zdmc+">
+    <meta property="og:url" content="https://discord.gg/QnSwUKptQn">
+    <meta name="theme-color" content="#000000">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="preconnect" href="https://discord.gg" crossorigin>
+    <link rel="dns-prefetch" href="https://discord.gg">
+    <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNCMDI2RDMiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMzOUZGMjQiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDAiIHI9IjgwIiBmaWxsPSJ1cmwoI2cpIi8+PHBhdGggZD0iTTEwMCAxMEgzMEgxMjBIMTBWMTBIMHoiIGZpbGw9IndoaXRlIi8+PC9zdmc+">
+    <title>Vortex Warriors (VW) – FF Micro Deathmatch Tournaments</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --neon-purple: #C026D3;
+            --toxic-green: #39FF14;
+            --blood-red: #FF0033;
+            --deep-black: #000000;
+            --text-white: #ffffff;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-snap-type: y proximity;
+        }
+
+        body {
+            background-color: var(--deep-black);
+            color: var(--text-white);
+            font-family: 'Arial Black', 'Impact', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+            cursor: none;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--neon-purple);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease;
+            mix-blend-mode: difference;
+            will-change: transform;
+        }
+
+        .cursor-follower {
+            width: 8px;
+            height: 8px;
+            background: var(--toxic-green);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            transition: transform 0.3s ease;
+            will-change: transform;
+        }
+
+        .cursor-trail {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: var(--neon-purple);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9997;
+            opacity: 0.6;
+            will-change: opacity, transform;
+        }
+
+        /* Subtle Background Texture */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    rgba(192, 38, 211, 0.03) 0px,
+                    transparent 1px,
+                    transparent 2px,
+                    rgba(192, 38, 211, 0.03) 3px
+                );
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* Hero Vortex Background */
+        .hero-vortex {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 600px;
+            height: 600px;
+            transform: translate(-50%, -50%);
+            background: conic-gradient(
+                from 0deg,
+                transparent 0deg,
+                rgba(57, 255, 20, 0.1) 30deg,
+                transparent 60deg,
+                transparent 120deg,
+                rgba(57, 255, 20, 0.1) 150deg,
+                transparent 180deg,
+                transparent 240deg,
+                rgba(57, 255, 20, 0.1) 270deg,
+                transparent 300deg,
+                transparent 360deg
+            );
+            border-radius: 50%;
+            animation: rotate 20s linear infinite;
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        @keyframes rotate {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* Glitch Effect */
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-1px, 1px); }
+            40% { transform: translate(-1px, -1px); }
+            60% { transform: translate(1px, 1px); }
+            80% { transform: translate(1px, -1px); }
+            100% { transform: translate(0); }
+        }
+
+        .glitch {
+            position: relative;
+            display: inline-block;
+            will-change: transform;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
+            will-change: transform, opacity;
+        }
+
+        .glitch::before {
+            left: 1px;
+            text-shadow: -1px 0 var(--blood-red);
+            clip: rect(20px, 550px, 80px, 0);
+            animation: glitch 3s infinite linear alternate-reverse;
+        }
+
+        .glitch::after {
+            left: -1px;
+            text-shadow: 1px 0 var(--toxic-green);
+            clip: rect(60px, 550px, 100px, 0);
+            animation: glitch 4s infinite linear alternate-reverse;
+        }
+
+        .stagger-glitch .glitch:nth-child(1)::before { animation-delay: 0s; }
+        .stagger-glitch .glitch:nth-child(1)::after { animation-delay: 0.5s; }
+        .stagger-glitch .glitch:nth-child(2)::before { animation-delay: 0.2s; }
+        .stagger-glitch .glitch:nth-child(2)::after { animation-delay: 0.7s; }
+
+        /* Buttons */
+        .neon-btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: transparent;
+            border: 2px solid var(--neon-purple);
+            color: var(--text-white);
+            font-size: 1.2rem;
+            font-weight: 900;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            cursor: none;
+            position: relative;
+            overflow: hidden;
+            will-change: transform, box-shadow;
+        }
+
+        .neon-btn:hover {
+            background: var(--neon-purple);
+            box-shadow: 0 0 15px var(--neon-purple);
+            transform: translateY(-3px);
+        }
+
+        .neon-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+            will-change: width, height;
+        }
+
+        .neon-btn:active::after {
+            width: 300px;
+            height: 300px;
+        }
+
+        .neon-btn.green {
+            border-color: var(--toxic-green);
+            color: var(--toxic-green);
+        }
+
+        .neon-btn.green:hover {
+            background: var(--toxic-green);
+            color: var(--deep-black);
+            box-shadow: 0 0 15px var(--toxic-green);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 5%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(192, 38, 211, 0.3);
+            transition: all 0.3s ease;
+            will-change: padding, background, box-shadow;
+        }
+
+        nav.scrolled {
+            padding: 15px 5%;
+            background: rgba(0, 0, 0, 0.98);
+            box-shadow: 0 5px 20px rgba(192, 38, 211, 0.2);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--neon-purple);
+            text-shadow: 0 0 5px var(--neon-purple);
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-white);
+            text-decoration: none;
+            font-weight: 900;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--neon-purple);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--neon-purple);
+            text-shadow: 0 0 8px var(--neon-purple);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: none;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--neon-purple);
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            scroll-snap-align: start;
+        }
+
+        .hero-logo {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            line-height: 1.2;
+            transition: transform 0.3s ease;
+        }
+
+        .hero .tagline {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            color: var(--text-white);
+            margin-bottom: 40px;
+            max-width: 700px;
+            font-weight: normal;
+            letter-spacing: 1px;
+        }
+
+        .hero .subtext {
+            font-size: 1rem;
+            color: var(--toxic-green);
+            margin-top: 20px;
+            font-weight: bold;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 80px 5%;
+            background: #0a0a0a;
+            scroll-snap-align: start;
+            position: relative;
+            contain: layout style;
+        }
+
+        .stats-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(192, 38, 211, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
+            will-change: opacity;
+        }
+
+        .stats-section.visible::before {
+            opacity: 1;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 50px;
+            color: var(--neon-purple);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .stat-card {
+            background: rgba(192, 38, 211, 0.05);
+            border: 1px solid rgba(192, 38, 211, 0.3);
+            padding: 25px;
+            text-align: center;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            will-change: transform, border-color, background, box-shadow;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(57, 255, 20, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+            opacity: 0;
+            will-change: transform, opacity;
+        }
+
+        .stat-card:hover::before {
+            animation: shimmer 0.5s ease;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); opacity: 0; }
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--toxic-green);
+            background: rgba(57, 255, 20, 0.05);
+            box-shadow: 0 10px 30px rgba(57, 255, 20, 0.2);
+        }
+
+        .stat-number {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 900;
+            color: var(--toxic-green);
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-white);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.8;
+        }
+
+        .stats-subtitle {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 1.3rem;
+            color: var(--text-white);
+            font-style: italic;
+            font-weight: normal;
+        }
+
+        /* Games Section */
+        .games-section {
+            padding: 80px 5%;
+            background: var(--deep-black);
+            scroll-snap-align: start;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 50px;
+            color: var(--neon-purple);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .game-card {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid var(--neon-purple);
+            border-radius: 10px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            will-change: transform, border-color, box-shadow;
+        }
+
+        .game-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(192, 38, 211, 0.1) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            will-change: opacity;
+        }
+
+        .game-card:hover::before {
+            opacity: 1;
+        }
+
+        .game-card:hover {
+            border-color: var(--toxic-green);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(57, 255, 20, 0.3);
+        }
+
+        .game-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--toxic-green);
+            filter: drop-shadow(0 0 5px var(--toxic-green));
+        }
+
+        .game-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--neon-purple);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .game-desc {
+            color: var(--text-white);
+            opacity: 0.9;
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .game-features {
+            margin-top: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .game-feature-tag {
+            background: rgba(57, 255, 20, 0.1);
+            border: 1px solid var(--toxic-green);
+            color: var(--toxic-green);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+        }
+
+        /* Trust Section */
+        .trust-section {
+            padding: 80px 5%;
+            background: #0a0a0a;
+            scroll-snap-align: start;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 50px;
+            color: var(--neon-purple);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .trust-list {
+            max-width: 900px;
+            margin: 0 auto 50px;
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 18px;
+            margin-bottom: 12px;
+            background: rgba(57, 255, 20, 0.03);
+            border-left: 3px solid var(--toxic-green);
+            border-radius: 0 8px 8px 0;
+            transition: all 0.3s ease;
+            position: relative;
+            will-change: transform;
+        }
+
+        .trust-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 0;
+            height: 100%;
+            background: rgba(57, 255, 20, 0.1);
+            transition: width 0.3s ease;
+            will-change: width;
+        }
+
+        .trust-item:hover::before {
+            width: 100%;
+        }
+
+        .trust-item:hover {
+            transform: translateX(5px);
+        }
+
+        .trust-icon {
+            font-size: 1.5rem;
+            color: var(--toxic-green);
+            z-index: 1;
+        }
+
+        .trust-text {
+            font-size: 1rem;
+            color: var(--text-white);
+            font-weight: bold;
+            z-index: 1;
+        }
+
+        /* Today's Matches Section */
+        .matches-section {
+            padding: 80px 5%;
+            background: linear-gradient(180deg, var(--deep-black) 0%, #0a0a1a 100%);
+            scroll-snap-align: start;
+        }
+
+        .matches-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .match-card {
+            background: rgba(192, 38, 211, 0.05);
+            border: 1px solid rgba(192, 38, 211, 0.3);
+            border-radius: 10px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            will-change: transform, border-color, box-shadow;
+        }
+
+        .match-card:hover {
+            border-color: var(--toxic-green);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(57, 255, 20, 0.2);
+        }
+
+        .match-game {
+            font-size: 1.5rem;
+            color: var(--neon-purple);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .match-time {
+            font-size: 1.1rem;
+            color: var(--toxic-green);
+            margin-bottom: 10px;
+        }
+
+        .match-entry {
+            font-size: 1.2rem;
+            color: var(--text-white);
+            margin-bottom: 10px;
+        }
+
+        .match-slots {
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 20px;
+        }
+
+        .match-slots .slots-left {
+            color: var(--toxic-green);
+            font-weight: 900;
+        }
+
+        .match-join-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: var(--neon-purple);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 900;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .match-join-btn:hover {
+            background: var(--toxic-green);
+            color: var(--deep-black);
+            box-shadow: 0 0 15px var(--toxic-green);
+        }
+
+        .match-urgency {
+            margin-top: 15px;
+            font-size: 0.85rem;
+            color: var(--blood-red);
+            text-align: center;
+            font-weight: 900;
+        }
+
+        /* Join Section */
+        .join-section {
+            padding: 100px 5%;
+            text-align: center;
+            background: linear-gradient(180deg, var(--deep-black) 0%, #0a0a1a 100%);
+            scroll-snap-align: start;
+        }
+
+        .join-section h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 20px;
+            color: var(--neon-purple);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .join-section p {
+            font-size: 1.1rem;
+            color: var(--text-white);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+        }
+
+        .theme-switch {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: rgba(192, 38, 211, 0.2);
+            border: 1px solid var(--neon-purple);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: none;
+            z-index: 1001;
+            transition: all 0.3s ease;
+            will-change: transform, background;
+        }
+
+        .theme-switch:hover {
+            background: var(--neon-purple);
+            transform: scale(1.1);
+        }
+
+        .join-note {
+            margin-top: 30px;
+            color: var(--toxic-green);
+            font-size: 0.95rem;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 5%;
+            background: #050505;
+            border-top: 1px solid rgba(192, 38, 211, 0.3);
+            text-align: center;
+            scroll-snap-align: start;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--neon-purple);
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-white);
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--neon-purple);
+        }
+
+        .disclaimer {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 20px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.5;
+        }
+
+        .copyright {
+            color: var(--toxic-green);
+            font-weight: 900;
+            font-size: 0.9rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            body {
+                cursor: auto;
+            }
+
+            .cursor, .cursor-follower, .cursor-trail {
+                display: none;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: rgba(0, 0, 0, 0.98);
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding-top: 50px;
+                transition: left 0.3s ease;
+                border-top: 1px solid var(--neon-purple);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .hamburger {
+                display: flex;
+                cursor: pointer;
+            }
+
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -6px);
+            }
+
+            .hero {
+                padding: 100px 20px;
+            }
+
+            .stats-grid,
+            .games-grid,
+            .matches-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        /* Fade-in animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursorFollower"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="logo">VW</div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#stats">Stats</a></li>
+            <li><a href="#games">Games</a></li>
+            <li><a href="#trust">Why Trust</a></li>
+            <li><a href="#matches">Today's Matches</a></li>
+            <li><a href="https://discord.gg/QnSwUKptQn" target="_blank">Discord</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Flash Messages -->
+    <div style="position: fixed; top: 80px; left: 50%; transform: translateX(-50%); z-index: 9999; max-width: 600px; width: 90%;">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div style="margin-bottom: 10px; padding: 15px 20px; border-radius: 8px; border: 2px solid; background: rgba(0,0,0,0.9); backdrop-filter: blur(10px); animation: slideDown 0.3s ease;">
+                        {% if category == 'success' %}
+                            <style>.flash-msg { border-color: var(--toxic-green); color: var(--toxic-green); }</style>
+                            <div class="flash-msg" style="font-weight: 900; text-transform: uppercase; letter-spacing: 1px;">
+                                ✓ {{ message }}
+                            </div>
+                        {% elif category == 'error' %}
+                            <style>.flash-msg { border-color: var(--blood-red); color: var(--blood-red); }</style>
+                            <div class="flash-msg" style="font-weight: 900; text-transform: uppercase; letter-spacing: 1px;">
+                                ✗ {{ message }}
+                            </div>
+                        {% else %}
+                            <style>.flash-msg { border-color: var(--neon-purple); color: var(--neon-purple); }</style>
+                            <div class="flash-msg" style="font-weight: 900; text-transform: uppercase; letter-spacing: 1px;">
+                                ℹ {{ message }}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <!-- Pass ID Success Banner (from query param) -->
+    {% if pass_id %}
+    <div style="position: fixed; top: 200px; left: 50%; transform: translateX(-50%); z-index: 9998; max-width: 700px; width: 90%; animation: pulse-banner 2s ease-in-out infinite alternate;">
+        <div style="background: linear-gradient(135deg, rgba(57, 255, 20, 0.15) 0%, rgba(57, 255, 20, 0.05) 100%); border: 3px solid var(--toxic-green); border-radius: 15px; padding: 25px; text-align: center; box-shadow: 0 0 30px rgba(57, 255, 20, 0.4);">
+            <div style="font-size: 1.5rem; color: var(--toxic-green); margin-bottom: 15px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px;">
+                🎟️ Your Tournament Pass is Ready!
+            </div>
+            <div style="font-size: 0.9rem; color: var(--text-white); margin-bottom: 10px;">Save this Pass ID securely. You'll need it to access your portal.</div>
+            <div style="font-family: 'Courier New', monospace; font-size: 2.5rem; font-weight: 900; color: var(--toxic-green); letter-spacing: 4px; padding: 15px; background: rgba(0,0,0,0.5); border-radius: 8px; border: 2px dashed var(--toxic-green); display: inline-block; margin: 10px 0;">
+                {{ pass_id }}
+            </div>
+            <div style="margin-top: 15px;">
+                <a href="/portal?pass={{ pass_id }}" class="neon-btn green" style="display: inline-block; text-decoration: none; font-size: 1rem; padding: 12px 30px;">Access Your Portal Now</a>
+            </div>
+            <div style="font-size: 0.8rem; color: #888; margin-top: 15px;">
+                ⚠️ Status: Pending Admin Approval | Room details will be available after approval
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <style>
+        @keyframes slideDown {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes pulse-banner {
+            0% { box-shadow: 0 0 20px rgba(57, 255, 20, 0.3); }
+            100% { box-shadow: 0 0 40px rgba(57, 255, 20, 0.6); }
+        }
+    </style>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-vortex" id="heroVortex"></div>
+        <h1 class="hero-logo glitch stagger-glitch" data-text="VORTEX">VORTEX</h1>
+        <h1 class="hero-logo glitch stagger-glitch" data-text="WARRIORS">WARRIORS</h1>
+        <p class="tagline">India's Deadliest Micro FF Deathmatch Org</p>
+        <a href="#matches" class="neon-btn">Join Today's Matches</a>
+        <p class="subtext">Matches fill fast. Entry closes automatically.</p>
+    </section>
+
+    <!-- Pass ID Lookup Section -->
+    <section class="pass-lookup-section fade-in" id="pass-lookup" style="padding: 80px 5%; background: #0a0a0a; scroll-snap-align: start;">
+        <div class="container" style="max-width: 600px; margin: 0 auto;">
+            <h2 class="section-title glitch" data-text="Access Your Tournament Pass">Access Your Tournament Pass</h2>
+            <p style="text-align: center; color: var(--text-white); margin-bottom: 30px; font-size: 1.1rem; opacity: 0.9;">
+                Enter your unique Pass ID to view your tournament details, room information, and status.
+            </p>
+            <form action="/portal" method="GET" style="max-width: 500px; margin: 0 auto;">
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label for="pass_id" style="display: block; margin-bottom: 10px; color: var(--toxic-green); font-weight: 900; text-transform: uppercase; font-size: 1rem; letter-spacing: 1px; text-align: center;">Your Pass ID</label>
+                    <input type="text" id="pass_id" name="pass" placeholder="e.g., VW-ABCD-FF" required style="width: 100%; padding: 15px; background: rgba(0, 0, 0, 0.5); border: 2px solid var(--neon-purple); border-radius: 5px; color: var(--text-white); font-size: 1.1rem; font-family: 'Courier New', monospace; text-align: center; text-transform: uppercase; transition: all 0.3s ease;">
+                </div>
+                <button type="submit" class="neon-btn" style="width: 100%; max-width: 300px; display: block; margin: 0 auto; font-size: 1.1rem; padding: 15px 30px;">Access Portal</button>
+            </form>
+            <p style="text-align: center; color: #888; margin-top: 20px; font-size: 0.9rem;">
+                Pass ID is generated after payment submission. Check your email or SMS.
+            </p>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section fade-in" id="stats">
+        <h2 class="section-title glitch" data-text="VW By Numbers">VW By Numbers</h2>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number" data-target="120">0</div>
+                <div class="stat-label">Tournaments Hosted</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" data-target="28500">0</div>
+                <div class="stat-label">Total Prize Pools Dropped</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" data-target="1450">0</div>
+                <div class="stat-label">Registered Warriors</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" data-target="95">0</div>
+                <div class="stat-label">Warrior Satisfaction</div>
+            </div>
+        </div>
+        <p class="stats-subtitle">Building strong since early 2026 – Join the real growth!</p>
+    </section>
+
+    <!-- Games Section -->
+    <section class="games-section fade-in" id="games">
+        <h2 class="section-title glitch" data-text="Supported Games">Supported Games</h2>
+        <div class="games-grid">
+            <div class="game-card">
+                <div class="game-icon">⚔️</div>
+                <h3 class="game-title">Free Fire</h3>
+                <p class="game-desc">Deathmatch / Clash Squad Micro Tournaments<br>High-intensity 4v4 battles<br>Instant matchmaking<br>Daily ranked competitions</p>
+                <div class="game-features">
+                    <span class="game-feature-tag">4v4</span>
+                    <span class="game-feature-tag">Ranked</span>
+                    <span class="game-feature-tag">Instant</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Section -->
+    <section class="trust-section fade-in" id="trust">
+        <h2 class="section-title glitch" data-text="Why Trust VW">Why Trust VW</h2>
+        <div class="trust-list">
+            <div class="trust-item">
+                <span class="trust-icon">✓</span>
+                <span class="trust-text">100% Real Players – No Bots, No Fakes</span>
+            </div>
+            <div class="trust-item">
+                <span class="trust-icon">🛡️</span>
+                <span class="trust-text">Strict Anti-Cheat + Live Streaming Finals</span>
+            </div>
+            <div class="trust-item">
+                <span class="trust-icon">💸</span>
+                <span class="trust-text">Instant UPI Payouts</span>
+            </div>
+            <div class="trust-item">
+                <span class="trust-icon">📊</span>
+                <span class="trust-text">Fully Transparent Leaderboards</span>
+            </div>
+            <div class="trust-item">
+                <span class="trust-icon">🔍</span>
+                <span class="trust-text">3-Step Verification for Every Event</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Today's Matches Section -->
+    <section class="matches-section fade-in" id="matches">
+        <h2 class="section-title glitch" data-text="Today's Matches">Today's Matches</h2>
+        <div class="matches-grid">
+            {% for match in matches %}
+            <div class="match-card">
+                <div class="match-game">{{ match.game }}</div>
+                <div class="match-time">Time: {{ match.time.strftime('%I:%M %p') }}</div>
+                <div class="match-entry">Entry: ₹{{ match.entry_fee }}</div>
+                <div class="match-slots">
+                    Slots Left: <span class="slots-left">{{ match.available_slots }}/{{ match.total_slots }}</span>
+                </div>
+                {% if match.available_slots > 0 %}
+                <a href="/join/{{ match.id }}" class="match-join-btn">Join Now</a>
+                {% else %}
+                <a href="#" class="match-join-btn" style="background: #666; cursor: not-allowed;">Sold Out</a>
+                {% endif %}
+                <div class="match-urgency">⚠️ Matches fill fast. Entry closes automatically.</div>
+            </div>
+            {% else %}
+            <div class="match-card" style="grid-column: 1 / -1; text-align: center;">
+                <p style="font-size: 1.2rem; color: var(--text-white);">No matches scheduled for today.</p>
+                <p style="color: var(--toxic-green); margin-top: 10px;">Check back later or contact admin for updates.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Join Section -->
+    <section class="join-section fade-in" id="join">
+        <h2 class="glitch" data-text="Ready to Fight?">Ready to Fight?</h2>
+        <p>Join today's matches and prove your skills. Fast payments, instant confirmations.</p>
+        <a href="#matches" class="neon-btn green" style="font-size: 1.3rem; padding: 18px 50px;">View Matches</a>
+        <p class="join-note">No fake counters. Just real tournaments. Join now.</p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo">VW</div>
+        <div class="footer-links">
+            <a href="#home">Home</a>
+            <a href="#stats">Stats</a>
+            <a href="#games">Games</a>
+            <a href="#trust">Why Trust</a>
+            <a href="#matches">Matches</a>
+            <a href="https://discord.gg/QnSwUKptQn" target="_blank">Discord</a>
+            <a href="mailto:contact@vortexwarriors.com">Contact</a>
+        </div>
+        <p class="disclaimer">Vortex Warriors is an independent micro esports community for fair-play Free Fire Deathmatch events. Follow all platform rules.</p>
+        <p class="copyright">© 2026 Vortex Warriors</p>
+    </footer>
+
+    <!-- Theme Switch -->
+    <div class="theme-switch" id="themeSwitch" title="Theme (Dark mode only)">
+        <span style="color: var(--neon-purple);">🌙</span>
+    </div>
+
+    <script>
+        // Custom Cursor - Optimized
+        const cursor = document.getElementById('cursor');
+        const cursorFollower = document.getElementById('cursorFollower');
+        let mouseX = 0, mouseY = 0;
+        let followerX = 0, followerY = 0;
+        let lastCursorUpdate = 0;
+        const cursorUpdateThrottle = 16;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            const now = Date.now();
+            if (now - lastCursorUpdate >= cursorUpdateThrottle) {
+                cursor.style.left = mouseX - 10 + 'px';
+                cursor.style.top = mouseY - 10 + 'px';
+                lastCursorUpdate = now;
+            }
+        });
+
+        function animateFollower() {
+            followerX += (mouseX - followerX) * 0.15;
+            followerY += (mouseY - followerY) * 0.15;
+            cursorFollower.style.left = followerX - 4 + 'px';
+            cursorFollower.style.top = followerY - 4 + 'px';
+            requestAnimationFrame(animateFollower);
+        }
+        animateFollower();
+
+        // Cursor trail with object pooling
+        const trail = [];
+        const trailLength = 8;
+        const trailPool = [];
+        let lastTrailUpdate = 0;
+        const trailThrottle = 50;
+
+        document.addEventListener('mousemove', (e) => {
+            const now = Date.now();
+            if (now - lastTrailUpdate < trailThrottle) return;
+            lastTrailUpdate = now;
+            
+            const dot = trailPool.length > 0 ? trailPool.pop() : document.createElement('div');
+            dot.className = 'cursor-trail';
+            dot.style.left = e.clientX - 2 + 'px';
+            dot.style.top = e.clientY - 2 + 'px';
+            dot.style.opacity = '0.6';
+            document.body.appendChild(dot);
+            trail.push(dot);
+            
+            if (trail.length > trailLength) {
+                const oldDot = trail.shift();
+                oldDot.style.opacity = '0';
+                setTimeout(() => {
+                    oldDot.remove();
+                    trailPool.push(oldDot);
+                }, 300);
+            }
+            
+            setTimeout(() => {
+                dot.style.opacity = '0';
+                setTimeout(() => {
+                    dot.remove();
+                    trailPool.push(dot);
+                }, 300);
+            }, 150);
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Menu
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Parallax Hero Logo
+        const heroVortex = document.getElementById('heroVortex');
+        let lastParallaxUpdate = 0;
+        const parallaxThrottle = 16;
+
+        window.addEventListener('scroll', () => {
+            const now = Date.now();
+            if (now - lastParallaxUpdate >= parallaxThrottle) {
+                const scrolled = window.pageYOffset;
+                const rate = scrolled * 0.3;
+                heroVortex.style.transform = `translate(-50%, -50%) rotate(${rate}deg) scale(${1 + scrolled * 0.0005})`;
+                lastParallaxUpdate = now;
+            }
+        });
+
+        // Counter Animation with easing
+        const counters = document.querySelectorAll('.stat-number');
+        const easeOutQuad = (t) => t * (2 - t);
+        
+        const animateCounter = (counter) => {
+            const target = +counter.getAttribute('data-target');
+            const duration = 2000;
+            const startTime = performance.now();
+            
+            const updateCounter = (currentTime) => {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const easedProgress = easeOutQuad(progress);
+                const current = Math.floor(target * easedProgress);
+                
+                let displayValue = current.toLocaleString('en-IN');
+                if (counter.getAttribute('data-target') === '95') {
+                    displayValue = current + '%';
+                }
+                counter.innerText = displayValue;
+                
+                if (progress < 1) {
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    let finalValue = target.toLocaleString('en-IN');
+                    if (counter.getAttribute('data-target') === '95') {
+                        finalValue = target + '%';
+                    }
+                    counter.innerText = finalValue;
+                }
+            };
+            
+            requestAnimationFrame(updateCounter);
+        };
+
+        const observerOptions = {
+            threshold: 0.3,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.closest('.stats-section').classList.add('visible');
+                    animateCounter(entry.target);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(() => {
+                counters.forEach(counter => {
+                    observer.observe(counter);
+                });
+            }, { timeout: 2000 });
+        } else {
+            counters.forEach(counter => {
+                observer.observe(counter);
+            });
+        }
+
+        // Fade-in on scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const fadeObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    fadeObserver.unobserve(entry.target);
+                }
+            });
+        }, { 
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        requestAnimationFrame(() => {
+            fadeElements.forEach(el => fadeObserver.observe(el));
+        });
+
+        // Smooth scroll with event delegation
+        document.addEventListener('click', (e) => {
+            const anchor = e.target.closest('a[href^="#"]');
+            if (!anchor) return;
+            
+            const href = anchor.getAttribute('href');
+            if (href === '#') return;
+            
+            const target = document.querySelector(href);
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        }, { passive: true });
+
+        // Glitch hover effect with event delegation
+        document.addEventListener('mouseenter', (e) => {
+            const glitchEl = e.target.closest('.glitch');
+            if (glitchEl) {
+                glitchEl.style.animation = 'glitch 0.5s infinite';
+            }
+        }, true);
+
+        document.addEventListener('mouseleave', (e) => {
+            const glitchEl = e.target.closest('.glitch');
+            if (glitchEl) {
+                glitchEl.style.animation = '';
+            }
+        }, true);
+
+        // Theme switch
+        document.getElementById('themeSwitch').addEventListener('click', () => {
+            alert('Only dark mode available - Vortex Warriors cyberpunk theme!');
+        });
+    </script>
+</body>
+</html>

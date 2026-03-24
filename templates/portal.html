@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Portal - Vortex Warriors</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --neon-purple: #C026D3;
+            --toxic-green: #39FF14;
+            --blood-red: #FF0033;
+            --deep-black: #000000;
+            --text-white: #ffffff;
+        }
+
+        body {
+            background-color: var(--deep-black);
+            color: var(--text-white);
+            font-family: 'Arial Black', 'Impact', sans-serif;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--neon-purple);
+        }
+
+        .logo {
+            font-size: 2rem;
+            color: var(--neon-purple);
+            text-shadow: 0 0 10px var(--neon-purple);
+            letter-spacing: 2px;
+        }
+
+        .pass-id {
+            background: rgba(57, 255, 20, 0.1);
+            border: 1px solid var(--toxic-green);
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            color: var(--toxic-green);
+            font-weight: 900;
+        }
+
+        .portal-card {
+            background: rgba(192, 38, 211, 0.05);
+            border: 1px solid var(--neon-purple);
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 20px rgba(192, 38, 211, 0.2);
+        }
+
+        .portal-card h2 {
+            color: var(--neon-purple);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .info-item {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid var(--toxic-green);
+        }
+
+        .info-item label {
+            display: block;
+            color: var(--toxic-green);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .info-item span {
+            font-size: 1.1rem;
+            color: var(--text-white);
+            font-weight: 900;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 900;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .status-pending {
+            background: rgba(255, 193, 7, 0.2);
+            color: #FFC107;
+            border: 1px solid #FFC107;
+        }
+
+        .status-paid {
+            background: rgba(57, 255, 20, 0.2);
+            color: var(--toxic-green);
+            border: 1px solid var(--toxic-green);
+        }
+
+        .status-live {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00C3FF;
+            border: 1px solid #00C3FF;
+            animation: pulse 2s infinite;
+        }
+
+        .status-completed {
+            background: rgba(192, 38, 211, 0.2);
+            color: var(--neon-purple);
+            border: 1px solid var(--neon-purple);
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .room-details {
+            background: rgba(255, 0, 51, 0.05);
+            border: 1px solid var(--blood-red);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .room-details.show {
+            display: block;
+        }
+
+        .room-details h3 {
+            color: var(--blood-red);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .room-code {
+            font-size: 2rem;
+            color: var(--toxic-green);
+            font-weight: 900;
+            text-align: center;
+            margin: 10px 0;
+            letter-spacing: 3px;
+        }
+
+        .room-password {
+            font-size: 1.5rem;
+            color: var(--neon-purple);
+            font-weight: 900;
+            text-align: center;
+            margin: 10px 0;
+            letter-spacing: 3px;
+        }
+
+        .discord-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: var(--neon-purple);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .discord-btn:hover {
+            background: var(--toxic-green);
+            color: var(--deep-black);
+            box-shadow: 0 0 20px var(--toxic-green);
+            transform: translateY(-3px);
+        }
+
+        .stream-link {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: rgba(0, 195, 255, 0.1);
+            border: 1px solid #00C3FF;
+            color: #00C3FF;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .stream-link:hover {
+            background: #00C3FF;
+            color: var(--deep-black);
+            box-shadow: 0 0 20px #00C3FF;
+        }
+
+        .warning-box {
+            background: rgba(255, 0, 51, 0.1);
+            border: 1px solid var(--blood-red);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .warning-box p {
+            color: var(--blood-red);
+            font-weight: 900;
+            font-size: 0.9rem;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+            color: var(--text-white);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover {
+            color: var(--neon-purple);
+        }
+
+        .no-access {
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .no-access h2 {
+            color: var(--blood-red);
+            margin-bottom: 20px;
+        }
+
+        .no-access p {
+            margin-bottom: 20px;
+            color: #888;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            .pass-id {
+                font-size: 1rem;
+                padding: 8px 15px;
+            }
+            
+            .room-code {
+                font-size: 1.5rem;
+            }
+            
+            .room-password {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% if player %}
+        <div class="header">
+            <div class="logo">VW PLAYER PORTAL</div>
+            <div class="pass-id">PASS: {{ player.pass_id }}</div>
+        </div>
+
+        <div class="portal-card">
+            <h2>Player Information</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <label>Name</label>
+                    <span>{{ player.name }}</span>
+                </div>
+                <div class="info-item">
+                    <label>Game UID</label>
+                    <span>{{ player.uid }}</span>
+                </div>
+                <div class="info-item">
+                    <label>Discord</label>
+                    <span>{{ player.discord }}</span>
+                </div>
+                <div class="info-item">
+                    <label>Registration Date</label>
+                    <span>{{ player.created_at.strftime('%d %b %Y, %I:%M %p') }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="portal-card">
+            <h2>Match Details</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <label>Game</label>
+                    <span>{{ match.game }}</span>
+                </div>
+                <div class="info-item">
+                    <label>Match Time</label>
+                    <span>{{ match.time.strftime('%d %b %Y, %I:%M %p') }}</span>
+                </div>
+                <div class="info-item">
+                    <label>Entry Fee</label>
+                    <span>₹{{ match.entry_fee }}</span>
+                </div>
+                <div class="info-item">
+                    <label>Payment Status</label>
+                    <span class="status-badge status-{{ player.payment_status }}">{{ player.payment_status|upper }}</span>
+                </div>
+            </div>
+
+            {% if player.payment_status == 'paid' and match.room_id and match.room_password %}
+            <div class="room-details show">
+                <h3>🎮 Match Room Details</h3>
+                <div class="info-item" style="text-align: center; margin: 15px 0;">
+                    <label>Room ID</label>
+                    <div class="room-code">{{ match.room_id }}</div>
+                </div>
+                <div class="info-item" style="text-align: center; margin: 15px 0;">
+                    <label>Room Password</label>
+                    <div class="room-password">{{ match.room_password }}</div>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if match.discord_link %}
+            <a href="{{ match.discord_link }}" target="_blank" class="discord-btn">
+                🎯 Enter Match Server (Discord)
+            </a>
+            {% endif %}
+
+            {% if match.stream_link %}
+            <a href="{{ match.stream_link }}" target="_blank" class="stream-link">
+                📺 Watch Live Stream
+            </a>
+            {% endif %}
+
+            {% if player.payment_status != 'paid' %}
+            <div class="warning-box">
+                <p>⚠️ Payment not confirmed. Complete payment to access match details.</p>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="portal-card">
+            <h2>Important Instructions</h2>
+            <ul style="line-height: 2; margin-left: 20px;">
+                <li>Room details will be available 15 minutes before match time</li>
+                <li>Join the Discord server for announcements and support</li>
+                <li>Keep your Pass ID ready for verification</li>
+                <li>Report any issues immediately to admins</li>
+                <li>Fair play is mandatory – Any cheating will result in ban</li>
+            </ul>
+        </div>
+
+        <a href="/" class="back-link">← Back to Home</a>
+
+        {% else %}
+        <div class="no-access">
+            <h2>⚠️ Invalid Pass ID</h2>
+            <p>The Pass ID you provided is invalid or does not exist.</p>
+            <a href="/" class="neon-btn" style="display: inline-block; text-decoration: none;">Go to Home</a>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

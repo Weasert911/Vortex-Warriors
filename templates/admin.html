@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Vortex Warriors</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --neon-purple: #C026D3;
+            --toxic-green: #39FF14;
+            --blood-red: #FF0033;
+            --deep-black: #000000;
+            --text-white: #ffffff;
+        }
+
+        body {
+            background-color: var(--deep-black);
+            color: var(--text-white);
+            font-family: 'Arial Black', 'Impact', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 450px;
+            background: rgba(192, 38, 211, 0.05);
+            border: 1px solid var(--neon-purple);
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 0 30px rgba(192, 38, 211, 0.3);
+        }
+
+        .logo {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--neon-purple);
+            text-shadow: 0 0 10px var(--neon-purple);
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--text-white);
+            margin-bottom: 30px;
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--neon-purple);
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--toxic-green);
+            font-weight: 900;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--neon-purple);
+            border-radius: 5px;
+            color: var(--text-white);
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        input[type="password"]:focus {
+            outline: none;
+            border-color: var(--toxic-green);
+            box-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--neon-purple);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .login-btn:hover {
+            background: var(--toxic-green);
+            color: var(--deep-black);
+            box-shadow: 0 0 20px var(--toxic-green);
+            transform: translateY(-3px);
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: var(--text-white);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover {
+            color: var(--neon-purple);
+        }
+
+        .flash-messages {
+            margin-bottom: 20px;
+        }
+
+        .flash-messages .error {
+            background: rgba(255, 0, 51, 0.2);
+            border: 1px solid var(--blood-red);
+            color: var(--blood-red);
+            padding: 12px;
+            border-radius: 5px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .security-note {
+            margin-top: 25px;
+            padding: 15px;
+            background: rgba(255, 0, 51, 0.05);
+            border: 1px solid var(--blood-red);
+            border-radius: 5px;
+            font-size: 0.8rem;
+            color: var(--blood-red);
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .logo {
+                font-size: 2rem;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">VW</div>
+        <div class="subtitle">Admin Access Only</div>
+        <h1>Admin Login</h1>
+        
+        <div class="flash-messages">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+
+        <form action="/hadunion-pass:121/W" method="POST">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+            <div class="form-group">
+                <label for="password">Admin Password</label>
+                <input type="password" id="password" name="password" required placeholder="Enter admin password">
+            </div>
+
+            <button type="submit" class="login-btn">Access Dashboard</button>
+        </form>
+
+        <a href="/" class="back-link">← Back to Home</a>
+
+        <div class="security-note">
+            🔒 <strong>Security:</strong> This area is restricted. Unauthorized access is prohibited.
+        </div>
+    </div>
+</body>
+</html>
